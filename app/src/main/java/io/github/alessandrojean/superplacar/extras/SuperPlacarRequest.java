@@ -18,20 +18,16 @@ import io.github.alessandrojean.superplacar.domain.Gol;
 import io.github.alessandrojean.superplacar.domain.Jogo;
 import io.github.alessandrojean.superplacar.domain.Time;
 
-/**
- * Created by Desktop on 14/12/2017.
- */
-
 public class SuperPlacarRequest extends AsyncTask<Void, Void, List<Jogo>> {
     private WeakReference<MainActivity> activity;
 
     public SuperPlacarRequest(MainActivity mainActivity) {
-        this.activity = new WeakReference<MainActivity>(mainActivity);
+        this.activity = new WeakReference<>(mainActivity);
     }
 
     @Override
     protected List<Jogo> doInBackground(Void... voids) {
-        Document html = null;
+        Document html;
         List<Jogo> jogos = new ArrayList<>();
 
         try {
@@ -68,7 +64,7 @@ public class SuperPlacarRequest extends AsyncTask<Void, Void, List<Jogo>> {
         time.setNome(timeTag.select("span.team" + indice + "-name").text());
         time.setImagemUrl(timeTag.select("img").attr("src"));
 
-        String golsString = timeTag.select("span-team" + indice + "-score").text();
+        String golsString = timeTag.select("span.team" + indice + "-score").text();
         int gols = golsString.isEmpty() ? 0 : Integer.parseInt(golsString);
         time.setGols(gols);
 
